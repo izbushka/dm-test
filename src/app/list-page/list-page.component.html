@@ -1,0 +1,63 @@
+<div class="container">
+  <app-filter></app-filter>
+
+  <div class="list-table" *ngIf="tvShows">
+    <div class="list-table__row list-table__header">
+      <div class="name">
+        Name
+        <app-sorter (sort)="sortShows('name', $event)"></app-sorter>
+      </div>
+      <div class="country">Country</div>
+      <div class="score">
+        Score
+        <app-sorter (sort)="sortShows('vote_average', $event)"></app-sorter>
+      </div>
+      <div class="date">
+        Premiere
+        <app-sorter (sort)="sortShows('first_air_date', $event)"></app-sorter>
+      </div>
+
+    </div>
+    <div class="list-table__row notFound" *ngIf="!tvShows.length">
+      No TV Shows Found
+    </div>
+    <div class="list-table__row" *ngFor="let item of tvShows">
+      <div class="name">
+        <div class="poster">
+          <img src="{{item.poster_path}}">
+        </div>
+
+        {{item.name}}
+
+        <div class="overview">
+          {{item.overview}}
+        </div>
+
+        <div class="badges">
+          <div
+            *ngFor="let id of item.genre_ids"
+            class="badge {{ getGenreById(id) | noSpaces | lowercase }}"
+          >
+            {{ getGenreById(id) | lowercase}}
+          </div>
+        </div>
+      </div>
+
+      <div class="country">
+        <ng-container *ngFor="let co of item.origin_country">
+          {{co}}
+        </ng-container>
+      </div>
+
+      <div class="score">
+        {{item.vote_average}}
+      </div>
+
+      <div class="date">
+        {{item.first_air_date}}
+      </div>
+    </div>
+  </div>
+
+  <app-paginator></app-paginator>
+</div>

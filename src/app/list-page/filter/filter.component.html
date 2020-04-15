@@ -1,0 +1,24 @@
+<div class="filter">
+  <div class="filter__name">
+    <input class="filter__name" placeholder="Name" #nameFilter>
+    <i class="icon icofont-search-1"></i>
+  </div>
+
+  <div>
+    <select (change)="filterByGenre($event)">
+      <option>Genre</option>
+      <option *ngFor="let genre of genres" [value]="genre.id">
+        {{genre.name}}
+      </option>
+    </select>
+    <i class="icon icofont-caret-down"></i>
+  </div>
+
+  <div>
+    <select (change)="filterByYear($event)">
+      <option>Premiere Year</option>
+      <option  *ngFor="let year of years">{{year}}</option>
+    </select>
+    <i class="icon icofont-caret-down"></i>
+  </div>
+</div>
