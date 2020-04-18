@@ -1,41 +1,49 @@
-import {Component, OnInit} from '@angular/core';
-import {FilterParams, MovieService} from '../../shared/services/movie.service';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Paginator} from '../../shared/services/movie.service';
 
 @Component({
   selector: 'app-paginator',
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss']
 })
-export class PaginatorComponent implements OnInit {
-  filter: FilterParams;
+export class PaginatorComponent implements OnInit, OnChanges {
 
-  pages = [1, 2, 3, 4];
+  @Input() paginator: Paginator;
+  @Output() pagination: EventEmitter<any> = new EventEmitter();
+
+  pages = [];
   onPage = [2, 5, 10, 25];
 
-  constructor(private movieService: MovieService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.movieService.getFilters().subscribe(data => {
-        this.filter = data;
-        this.pages = [];
-        if (data.paginator.page > 1) {
-          this.pages.push(data.paginator.page - 1);
-        }
-        const totalPages = Math.ceil(data.paginator.total / data.paginator.limit);
-        for (let i = data.paginator.page; i <= totalPages; i++) {
-          this.pages.push(i);
-          if (this.pages.length >= 3) {
-            break;
-          }
+    this.updatePaginator();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.updatePaginator();
+  }
+
+  updatePaginator() {
+    if (this.paginator) {
+      this.pages = [];
+      if (this.paginator.page > 1) {
+        this.pages.push(this.paginator.page - 1);
+      }
+      for (let i = this.paginator.page; i <= this.paginator.maxPage; i++) {
+        this.pages.push(i);
+        if (this.pages.length >= 3) {
+          break;
         }
       }
-    );
+    }
   }
 
   setPage(page: number) {
-    this.movieService.setPage(page);
+    this.pagination.emit({page});
   }
-  setLimit(items: number) {
-    this.movieService.setLimit(items);
+
+  setLimit(limit: number) {
+    this.pagination.emit({limit});
   }
 }

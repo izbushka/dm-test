@@ -13,12 +13,7 @@ export interface FilterParams {
     genre_ids: number,
     first_air_date: string;
   };
-  paginator: {
-    page: number;
-    limit: number;
-    maxPage: number;
-    total: number;
-  };
+  paginator: Paginator;
   sort: {
     field: string;
     method: string;
@@ -27,6 +22,13 @@ export interface FilterParams {
     genres: number[];
     premiereYears: string[];
   };
+}
+
+export interface Paginator {
+  page: number;
+  total: number;
+  maxPage: number;
+  limit: number;
 }
 
 
@@ -129,27 +131,6 @@ export class MovieService {
       take(1),
       map(data => data.find(i => i.id === id).name)
     );
-    // const getGenre = () => {
-    //     if (this.genres) {
-    //       return this.genres.find(i => i.id === id).name;
-    //     } else {
-    //       return false;
-    //     }
-    // };
-    // return new Observable(
-    //   observer => {
-    //     const waiter = () => {
-    //       const res = getGenre();
-    //       if (!res) {
-    //         setTimeout(waiter, 100);
-    //       } else {
-    //         observer.next(res);
-    //         observer.complete();
-    //       }
-    //     };
-    //     waiter();
-    //   }
-    // );
   }
 
   getYears(): Observable<string[]> {

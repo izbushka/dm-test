@@ -1,19 +1,22 @@
-<div class="total">Found {{filter.paginator.total}} movies</div>
-<div class="pagination">
-  <div class="back"
-       [class.disabled]="filter.paginator.page === 1"
-       (click)="setPage(filter.paginator.page - 1)">&lt;
+<ng-container *ngIf="paginator">
+  <div class="total">Found {{paginator.total}} movies</div>
+  <div class="pagination">
+    <div class="back"
+         [class.disabled]="paginator.page === 1"
+         (click)="setPage(paginator.page - 1)">&lt;
+    </div>
+    <div
+      *ngFor="let page of pages"
+      [class.selected]="paginator.page === page"
+      (click)="setPage(page)">{{page}}</div>
+    <div class="back"
+         [class.disabled]="paginator.page === paginator.maxPage"
+         (click)="setPage(paginator.page + 1)">&gt;
+    </div>
   </div>
-  <div
-    *ngFor="let page of pages"
-    [class.selected]="filter.paginator.page === page"
-    (click)="setPage(page)">{{page}}</div>
-  <div class="back"
-       [class.disabled]="filter.paginator.page === filter.paginator.maxPage"
-       (click)="setPage(filter.paginator.page + 1)">&gt;</div>
-</div>
-<div class="onPage">
-  <div *ngFor="let limit of onPage"
-       [class.selected]="filter.paginator.limit === limit"
-       (click)="setLimit(limit)">{{limit}}</div>
-</div>
+  <div class="onPage">
+    <div *ngFor="let limit of onPage"
+         [class.selected]="paginator.limit === limit"
+         (click)="setLimit(limit)">{{limit}}</div>
+  </div>
+</ng-container>

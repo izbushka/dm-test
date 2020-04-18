@@ -7,18 +7,18 @@
     <div class="table-title table-row">
       <div class="name" (click)="onSort('name')">
         Name
-        <app-sorter [name]="'name'"></app-sorter>
+        <app-sorter [state]="sorters.name.state"></app-sorter>
       </div>
       <div class="score" (click)="onSort('vote_average')">
         Score
-        <app-sorter [name]="'vote_average'"></app-sorter>
+        <app-sorter [state]="sorters.vote_average.state"></app-sorter>
       </div>
       <div class="country">
         Countries
       </div>
       <div class="premiere" (click)="onSort('first_air_date')">
         Premiere
-        <app-sorter [name]="'first_air_date'"></app-sorter>
+        <app-sorter [state]="sorters.first_air_date.state"></app-sorter>
       </div>
     </div>
 
@@ -59,7 +59,7 @@
     </div>
   </div>
 
-  <app-paginator></app-paginator>
+  <app-paginator (pagination)="switchPage($event)" [paginator]="paginator"></app-paginator>
 
 </div>
 
