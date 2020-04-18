@@ -1,28 +1,34 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { ListPageComponent } from './list-page/list-page.component';
-import { NoSpacesPipe } from './shared/pipes/nospaces.pipe';
-import { PaginatorComponent } from './list-page/paginator/paginator.component';
-import { FilterComponent } from './list-page/filter/filter.component';
-import {SorterComponent} from './list-page/sorter/sorter.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {ListingPageComponent} from './listing-page/listing-page.component';
+import {HttpClientModule} from '@angular/common/http';
+import {NgxWebstorageModule} from 'ngx-webstorage';
+import {FilterComponent} from './listing-page/filter/filter.component';
+import {PaginatorComponent} from './listing-page/paginator/paginator.component';
+import {SorterComponent} from './listing-page/sorter/sorter.component';
+import {GenreNamePipe} from './shared/pipes/genre-name.pipe';
+import {RemoveSpacesPipe} from './shared/pipes/remove-spaces.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListPageComponent,
-    NoSpacesPipe,
-    PaginatorComponent,
+    ListingPageComponent,
     FilterComponent,
-    SorterComponent
+    PaginatorComponent,
+    SorterComponent,
+    GenreNamePipe,
+    RemoveSpacesPipe
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    HttpClientModule,
+    AppRoutingModule,
+    NgxWebstorageModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

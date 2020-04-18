@@ -1,0 +1,27 @@
+<div class="name">
+  <input placeholder="Name" #name>
+  <i class="icon icofont-search-1"></i>
+</div>
+<div class="genre">
+  <select (change)="setGenres($event.target)">
+    <option></option>
+    <option
+      *ngFor="let genre of genres"
+      [value]="genre.id"
+      [disabled]="!isGenreAvailable(genre.id)"
+    >{{genre.name}}</option>
+  </select>
+  <span *ngIf="!filter.filter.genre_ids" class="placeholder">Genre</span>
+  <i class="icon icofont-caret-down"></i>
+</div>
+<div class="premiere">
+  <select (change)="setPremiereYear($event.target)">
+    <option></option>
+    <option
+      *ngFor="let year of years"
+      [disabled]="!isYearAvailable(year)"
+    >{{year}}</option>
+  </select>
+  <span *ngIf="!filter.filter.first_air_date" class="placeholder">Premiere</span>
+  <i class="icon icofont-caret-down"></i>
+</div>

@@ -1,0 +1,65 @@
+<div class="container">
+
+  <app-filter></app-filter>
+
+  <div class="table">
+
+    <div class="table-title table-row">
+      <div class="name" (click)="onSort('name')">
+        Name
+        <app-sorter [name]="'name'"></app-sorter>
+      </div>
+      <div class="score" (click)="onSort('vote_average')">
+        Score
+        <app-sorter [name]="'vote_average'"></app-sorter>
+      </div>
+      <div class="country">
+        Countries
+      </div>
+      <div class="premiere" (click)="onSort('first_air_date')">
+        Premiere
+        <app-sorter [name]="'first_air_date'"></app-sorter>
+      </div>
+    </div>
+
+    <div class="table-row" *ngFor="let movie of movies">
+
+      <div class="name">
+        <div class="name-pic">
+          <img *ngIf="movie.poster_path" [src]="movie.poster_path"/>
+        </div>
+        <div class="name-data">
+          <div class="name-data-title">
+            {{movie.name}}
+          </div>
+          <div class="name-data-description">
+            {{movie.overview}}
+          </div>
+          <div class="name-data-badges">
+            <div *ngFor="let id of movie.genre_ids" [class]="id | genreName | async| removeSpaces | lowercase">
+              {{id | genreName | async}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="score">
+        {{movie.vote_average}}
+        <small>({{movie.vote_count}} votes)</small>
+      </div>
+
+      <div class="country">
+        {{movie.origin_country}}
+      </div>
+
+      <div class="premiere">
+        {{movie.first_air_date}}
+      </div>
+
+    </div>
+  </div>
+
+  <app-paginator></app-paginator>
+
+</div>
+

@@ -1,0 +1,67 @@
+$bg: #f2994a;
+
+:host {
+  display: flex;
+  margin-bottom: 15px;
+
+  @media (max-width: 850px) {
+    flex-wrap: wrap;
+    .name {
+      flex-basis: 100%;
+      margin-right: 0;
+      margin-bottom: 15px;
+    }
+    & > div {
+      flex-basis: 40%;
+    }
+  }
+
+  & > div {
+    flex-shrink: 1;
+    flex-grow: 1;
+    padding: 0;
+    background: $bg;
+    font-size: 25px;
+    color: white;
+    position: relative;
+    margin-right: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    &:last-child {
+      margin-right: 0;
+    }
+    input, select {
+      font-size: 25px;
+      color: white;
+
+      padding: 10px 15px;
+      outline: 0;
+      border: none;
+      background: $bg;
+      width: 100%;
+      &::placeholder {
+        color: white;
+      }
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      text-indent: 1px;
+      text-overflow: '';
+      &::-ms-expand {
+        display: none;
+      }
+    }
+    .placeholder {
+      position: absolute;
+      pointer-events: none;
+      left: 15px;
+      top: 10px;
+    }
+  }
+  .icon {
+    position: absolute;
+    right: 10px;
+    top: 13px;
+    pointer-events: none;
+  }
+}

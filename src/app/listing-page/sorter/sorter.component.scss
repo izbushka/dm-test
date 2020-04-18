@@ -1,0 +1,28 @@
+:host {
+  display: inline-block;
+  //overflow: hidden;
+  width: 15px;
+  height: 26px;
+  position: absolute;
+  right: 5px;
+  .desc,
+  .asc {
+    top: 4px;
+    left: 2px;
+    position: absolute;
+    display: block;
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+    transform: rotate(45deg);
+    width: 8px;
+    height: 8px;
+    &.selected {
+      border-color: red;
+    }
+  }
+  .desc {
+    bottom: 4px;
+    top: auto;
+    transform: rotate(-135deg);
+  }
+}
